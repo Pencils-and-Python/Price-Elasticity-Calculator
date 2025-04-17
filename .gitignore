@@ -62,7 +62,7 @@ venv.bak/
 # Conda environment files
 conda-env/
 /conda-env/
-environment.yml
+
 
 # Streamlit
 .streamlit/
