@@ -1,6 +1,12 @@
 # data files
 zip_files/
 
+# Prevent huge files from being committed
+data/raw/
+data/processed/
+data/duckdb/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
