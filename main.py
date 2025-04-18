@@ -9,8 +9,9 @@ def main(persist: bool = True):
     con = connect_duckdb(persist)
     register_dataframes(train_df, store_df, con)
 
-    print("✅ DataFrames registered.")
-    print("Try a query like: SELECT * FROM train_df LIMIT 5;")
+    print("✅ DataFrames registered in DuckDB.")
+    print("Sample query result:")
+    print(con.execute("SELECT * FROM train_df LIMIT 5").fetchdf())
 
     return con
 
