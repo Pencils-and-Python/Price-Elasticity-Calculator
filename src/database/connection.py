@@ -3,7 +3,18 @@
 import duckdb
 from pathlib import Path
 
-DB_PATH = Path("data/processed/elasticity.duckdb")
+# Define the database path
+DB_PATH = Path("data/processed/rossmann.duckdb")
 
 def connect_duckdb(persist: bool = True):
-    return duckdb.connect(DB_PATH if persist else ":memory:")
+    """
+    Establishes a connection to the DuckDB database.
+
+    Args:
+        persist: If True, connects to the file-based database.
+                If False, creates an in-memory database.
+
+    Returns:
+        A DuckDB connection object
+    """
+    return duckdb.connect(str(DB_PATH) if persist else ":memory:")
