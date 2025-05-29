@@ -1,7 +1,6 @@
-"""src/database/db_cli.py"""
+"""db/db_cli.py"""
 
 import argparse
-from pathlib import Path
 import duckdb
 import sys
 import os
@@ -11,7 +10,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
 # Now we can import from our project modules
-from src.database.connection import connect_duckdb, DB_PATH
+from db.connection import connect_duckdb, DB_PATH
 
 
 def list_tables():

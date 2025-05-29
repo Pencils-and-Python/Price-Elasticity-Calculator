@@ -1,10 +1,10 @@
-"""src/database/create_db.py"""
+"""db/create_db.py"""
 
 import pandas as pd
 import duckdb
 from pathlib import Path
 import os
-from src.database.connection import DB_PATH
+from db.connection import DB_PATH
 
 def create_duckdb_from_csv():
     """

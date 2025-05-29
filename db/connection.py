@@ -1,4 +1,4 @@
-"""src/database/connection.py"""
+"""db/connection.py"""
 
 import duckdb
 from pathlib import Path
