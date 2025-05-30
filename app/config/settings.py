@@ -1,6 +1,11 @@
 """app/config/settings.py"""
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+# Load env vars
+load_dotenv()
 
 # === BASE PATH CONFIG ===
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
