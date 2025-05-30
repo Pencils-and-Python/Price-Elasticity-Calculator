@@ -48,8 +48,8 @@ model1, feature_names = joblib.load('../data/trained/random_forest_model_with_fe
 
 
 # ✅ Load test data
-X_test = pd.read_csv('../data/trained/X_test.csv')
-y_test = pd.read_csv('../data/trained/y_test.csv')
+X_test = pd.read_csv('../data/test/X_test.csv')
+y_test = pd.read_csv('../data/test/y_test.csv')
 
 # ✅ Make predictions
 y_pred = model.predict(X_test)

@@ -1,8 +1,8 @@
 """scripts/initialize_duckdb.py"""
 
 from scripts.load_data import load_raw_data
-from db.connection import connect_duckdb
-from db.register import register_dataframes
+from db import connect_duckdb
+from db import register_dataframes
 
 def initialize_duckdb(persist: bool = True):
     train_df, store_df = load_raw_data()
