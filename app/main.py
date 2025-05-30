@@ -26,17 +26,25 @@ import joblib
 from sklearn.metrics import mean_squared_error, r2_score
 
 # 1. Set page title
-st.set_page_config(page_title='Store Sales Prediction Dashboard')
+st.set_page_config(
+    page_title="Elasticity Risk Exposure Dashboard",
+    layout="wide"
+)
+
 
 # 🏷️ Title & description
-st.title('Store Sales Prediction Dashboard')
+st.title('📈 Elasticity Risk Exposure Dashboard')
+
 st.write("""
-This dashboard displays model evaluation metrics and prediction results 
-from the Random Forest sales forecasting model.
+Welcome to the Elasticity Risk Exposure Dashboard!  
+This tool explores how price changes impact revenue and demand using real-world sales data and a trained machine learning model.  
+Filter, visualize, and interact with your data to better understand elasticity in action.
 """)
 
+
 # 2. ✅ Load trained model
-model, feature_names = joblib.load('../data/trained/random_forest_model_with_features.pkl')
+model1, feature_names = joblib.load('../data/trained/random_forest_model_with_features.pkl')
+
 
 
 # ✅ Load test data
