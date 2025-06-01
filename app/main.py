@@ -31,6 +31,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_squared_error, r2_score
+from app.components.feature_importance import plot_feature_importance
 
 
 # === Paths ===
@@ -102,19 +103,18 @@ with tab1:
 # === Tab 2: Feature Insights ===
 with tab2:
     if st.checkbox("Show Feature Importances"):
+        st.caption("Feature importances reflect the global trained model and do not change with filters.")
         st.subheader("🔍 Feature Importances")
         try:
-            feature_importances = pd.Series(model.feature_importances_, index=X_test.columns)
-            fig, ax = plt.subplots()
-            feature_importances.sort_values().plot(kind='barh', ax=ax)
-            ax.set_xlabel("Importance")
-            ax.set_title("Feature Importances")
-            st.pyplot(fig)
+            # Prepare importance DataFrame
+            importances = pd.DataFrame({
+                "feature": X_test.columns,
+                "importance": model.feature_importances_
+            })
+
+            plot_feature_importance(importances)
         except Exception as e:
             st.error(f"❌ Could not plot feature importances: {e}")
-
-    st.subheader("📐 Elasticity Curve (Coming Soon)")
-    st.info("Elasticity curve visualization will appear here once implemented.")
 
 # === Tab 3: Download Predictions ===
 with tab3:
