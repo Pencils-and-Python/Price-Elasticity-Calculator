@@ -57,15 +57,17 @@ Filter, visualize, and interact with your data to better understand elasticity i
 """)
 
 # === Load Model & Data ===
+# === Load Model & Data ===
 try:
     model, feature_names = load_model(MODEL_PATH)
     X_test = load_csv(X_TEST_PATH)
     y_test = load_csv(Y_TEST_PATH)
 except Exception as e:
-    st.error(f"❌ Failed to load model or data:\n{type(e).__name__}: {e}")
-    print("🧨 Exception details:", repr(e))
-    raise  # No st.stop() here — just let the exception crash and show logs
+    st.error(f"❌ Failed to load model or data: {e}")
+    import traceback
+    st.code(traceback.format_exc(), language="python")
     st.stop()
+
 
 # === Predictions & Metrics ===
 y_pred = model.predict(X_test)
