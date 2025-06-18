@@ -2,7 +2,7 @@
 
 import os
 import urllib.request
-from urllib.error import URLError
+import gdown
 import pandas as pd
 import joblib
 from pathlib import Path
@@ -19,12 +19,10 @@ def download_model(model_path: Path = MODEL_PATH):
         try:
             model_path.parent.mkdir(parents=True, exist_ok=True)
             print(f"Downloading model to: {model_path}")
-            urllib.request.urlretrieve(MODEL_URL, model_path)
+            gdown.download(MODEL_URL, str(model_path), quiet=False)
             print("Model downloaded successfully.")
-        except URLError as e:
-            raise ConnectionError(f"Failed to download model due to network error: {e}")
         except Exception as e:
-            raise RuntimeError(f"Unexpected error during model download: {e}")
+            raise RuntimeError(f"Error downloading model: {e}")
 
 
 def load_model(model_path: Path = MODEL_PATH):
