@@ -62,7 +62,9 @@ try:
     X_test = load_csv(X_TEST_PATH)
     y_test = load_csv(Y_TEST_PATH)
 except Exception as e:
-    st.error(f"❌ Failed to load model or data: {e}")
+    st.error(f"❌ Failed to load model or data:\n{type(e).__name__}: {e}")
+    print("🧨 Exception details:", repr(e))
+    raise  # No st.stop() here — just let the exception crash and show logs
     st.stop()
 
 # === Predictions & Metrics ===
