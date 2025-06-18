@@ -147,3 +147,6 @@ yarn-error.log*
 # DataSpell specific (in addition to general JetBrains patterns)
 .dataspell/
 .idea
+
+# for Streamlit build on the web
+environment.yml
