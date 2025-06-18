@@ -19,6 +19,10 @@
 6. Download predictions button (optional)
 """
 
+import os
+os.environ["STREAMLIT_WATCH_USE_POLLING"] = "true"
+os.environ["STREAMLIT_SERVER_FILE_WATCHER_TYPE"] = "none"
+
 from pathlib import Path
 import sys
 
