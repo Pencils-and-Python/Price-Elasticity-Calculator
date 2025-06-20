@@ -9,8 +9,8 @@ import joblib
 from pathlib import Path
 
 # === Constants ===
-MODEL_URL = "https://drive.google.com/uc?export=download&id=19C0rN2QWdOOFRZs1rTh3uCw3v4IRrZBr"
-MODEL_PATH = Path("data/trained_model/random_forest_model_with_features.pkl")
+MODEL_URL = "https://drive.google.com/file/d/17_UhY2TCPGFYqoJWYs60iLHv9fIFlXaz/view?usp=sharing"
+MODEL_PATH = Path("data/trained_model/rf_light_model.pkl")
 
 
 # === Model Handling ===

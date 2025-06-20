@@ -53,7 +53,7 @@ from streamlit import cache_resource
 # === Paths ===
 DATA_DIR = BASE_DIR / "data"
 PLOTS_DIR = BASE_DIR / "plots"
-MODEL_PATH = DATA_DIR / "trained_model" / "random_forest_model_with_features.pkl"
+MODEL_PATH = DATA_DIR / "trained_model" / "rf_light_model.pkl"
 X_TEST_PATH = DATA_DIR / "test" / "X_test.csv"
 Y_TEST_PATH = DATA_DIR / "test" / "y_test.csv"
 PREDICTION_PLOT_PATH = PLOTS_DIR / "actual_vs_predicted.png"
