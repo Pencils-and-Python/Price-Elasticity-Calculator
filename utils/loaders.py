@@ -7,6 +7,7 @@ import gdown
 import pandas as pd
 import joblib
 from pathlib import Path
+import cloudpickle
 
 # === Constants ===
 MODEL_URL = "https://drive.google.com/file/d/17_UhY2TCPGFYqoJWYs60iLHv9fIFlXaz/view?usp=sharing"
@@ -30,7 +31,8 @@ def download_model(model_path: Path = MODEL_PATH):
 def load_model(model_path: Path = MODEL_PATH):
     """Download and load the model, with caching."""
     download_model(model_path)
-    model, feature_names = joblib.load(model_path)
+    with open(model_path, "rb") as f:
+        model, feature_names = cloudpickle.load(f)
     return model, feature_names
 
 # UI
