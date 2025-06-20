@@ -4,7 +4,7 @@ pandas
 numpy
 matplotlib
 seaborn
-joblib
+joblib==1.1.0
 scikit-learn==1.6.1
 plotly
 gdown
