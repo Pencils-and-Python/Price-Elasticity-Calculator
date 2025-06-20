@@ -2,6 +2,7 @@
 
 import os
 import urllib.request
+import streamlit as st
 import gdown
 import pandas as pd
 import joblib
@@ -25,11 +26,26 @@ def download_model(model_path: Path = MODEL_PATH):
             raise RuntimeError(f"Error downloading model: {e}")
 
 
+@st.cache_resource(show_spinner="Downloading and loading model...")
 def load_model(model_path: Path = MODEL_PATH):
-    """Load the trained model from disk."""
+    """Download and load the model, with caching."""
     download_model(model_path)
     model, feature_names = joblib.load(model_path)
     return model, feature_names
+
+# UI
+st.title("Price Elasticity Risk Exposure")
+
+if st.button("Run Prediction"):
+    try:
+        model, features = cached_load_model()
+        # Prediction logic goes here, like:
+        # X = pd.DataFrame(...), etc.
+        # y_pred = model.predict(X)
+        st.success("Model loaded and ready for prediction.")
+    except Exception as e:
+        st.error(f"💥 Failed to load model: {e}")
+        st.stop()
 
 
 # === CSV Loader ===

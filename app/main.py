@@ -23,6 +23,15 @@ import os
 os.environ["STREAMLIT_WATCH_USE_POLLING"] = "true"
 os.environ["STREAMLIT_SERVER_FILE_WATCHER_TYPE"] = "none"
 
+
+import streamlit as st
+
+# === Page Config ===
+st.set_page_config(
+    page_title="Elasticity Risk Exposure Dashboard",
+    layout="wide"
+)
+
 from pathlib import Path
 import sys
 
@@ -31,11 +40,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(str(BASE_DIR))
 
 from utils.loaders import load_model, load_csv
-import streamlit as st
+
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_squared_error, r2_score
 from app.components.feature_importance import plot_feature_importance
+# Add near the top
+from streamlit import cache_resource
+
 
 
 # === Paths ===
@@ -46,11 +58,7 @@ X_TEST_PATH = DATA_DIR / "test" / "X_test.csv"
 Y_TEST_PATH = DATA_DIR / "test" / "y_test.csv"
 PREDICTION_PLOT_PATH = PLOTS_DIR / "actual_vs_predicted.png"
 
-# === Page Config ===
-st.set_page_config(
-    page_title="Elasticity Risk Exposure Dashboard",
-    layout="wide"
-)
+
 
 # === Header ===
 st.title("📈 Elasticity Risk Exposure Dashboard")
@@ -62,15 +70,26 @@ Filter, visualize, and interact with your data to better understand elasticity i
 
 # === Load Model & Data ===
 # === Load Model & Data ===
+@cache_resource(show_spinner="⏳ Downloading and loading model...")
+def safe_load_model():
+    return load_model(MODEL_PATH)
+
+@cache_resource(show_spinner="📦 Loading test data...")
+def safe_load_test_data():
+    X = load_csv(X_TEST_PATH)
+    y = load_csv(Y_TEST_PATH)
+    return X, y
+
 try:
-    model, feature_names = load_model(MODEL_PATH)
-    X_test = load_csv(X_TEST_PATH)
-    y_test = load_csv(Y_TEST_PATH)
+    model, feature_names = safe_load_model()
+    X_test, y_test = safe_load_test_data()
 except Exception as e:
-    st.error(f"❌ Failed to load model or data: {e}")
+    st.error("❌ Failed to load model or test data.")
+    st.code(str(e), language="python")
     import traceback
     st.code(traceback.format_exc(), language="python")
     st.stop()
+
 
 
 # === Predictions & Metrics ===
